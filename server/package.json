@@ -1,0 +1,30 @@
+{
+  "name": "campus-connect-server",
+  "version": "1.0.0",
+  "description": "Backend API for CampusConnect - Student Opportunity Sharing Portal",
+  "private": true,
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "keywords": [
+    "campusconnect",
+    "student-portal",
+    "mern",
+    "express",
+    "typescript"
+  ],
+  "author": "CampusConnect Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.20.1"
+  }
+}
