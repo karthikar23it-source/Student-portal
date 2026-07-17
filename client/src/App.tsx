@@ -1,27 +1,30 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import CreateAccountPage from './features/auth/pages/CreateAccountPage';
+import VerifyCollegeEmailPage from './features/auth/pages/VerifyCollegeEmailPage';
 
 function App() {
   return (
     <Routes>
+      {/* Default Route */}
       <Route path="/" element={<Navigate to="/register" replace />} />
 
+      {/* AUTH-001 */}
       <Route path="/register" element={<CreateAccountPage />} />
 
-      {/* TODO (AUTH-002)
-      <Route
-        path="/verify-email"
-        element={<VerifyCollegeEmailPage />}
-      />
-      */}
+      {/* AUTH-002 */}
+      <Route path="/verify-email" element={<VerifyCollegeEmailPage />} />
 
-      {/* TODO (AUTH-004)
+      {/* AUTH-004 (Coming Soon) */}
+      {/*
       <Route
         path="/login"
         element={<LoginPage />}
       />
       */}
+
+      {/* Fallback Route */}
+      <Route path="*" element={<Navigate to="/register" replace />} />
     </Routes>
   );
 }
