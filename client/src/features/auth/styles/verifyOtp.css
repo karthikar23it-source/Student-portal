@@ -1,0 +1,197 @@
+/* ===========================
+   Verify College Email Page
+=========================== */
+
+.verify-page {
+  min-height: 100vh;
+  background: #f4f7fc;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 20px;
+}
+
+/* ===========================
+   Card
+=========================== */
+
+.verify-card {
+  width: 100%;
+  max-width: 420px;
+
+  background: #ffffff;
+
+  border-radius: 24px;
+
+  padding: 40px 32px;
+
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+/* ===========================
+   Logo
+=========================== */
+
+.logo-box {
+  width: 56px;
+  height: 56px;
+
+  background: #2563eb;
+
+  border-radius: 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 24px;
+
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+}
+
+.logo-icon {
+  color: white;
+  font-size: 24px;
+}
+
+/* ===========================
+   Heading
+=========================== */
+
+.verify-card h1 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #0f172a;
+
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #64748b;
+  margin-bottom: 8px;
+
+  font-size: 16px;
+}
+
+.email-text {
+  color: #2563eb;
+  font-weight: 600;
+  font-size: 16px;
+
+  margin-bottom: 20px;
+}
+
+/* ===========================
+   OTP Input
+=========================== */
+
+.otp-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+.otp-box {
+  width: 52px;
+  height: 56px;
+
+  border: 1px solid #dbe3ef;
+  border-radius: 16px;
+
+  text-align: center;
+
+  font-size: 22px;
+  font-weight: 600;
+
+  outline: none;
+
+  transition: 0.2s;
+}
+
+.otp-box:focus {
+  border-color: #2563eb;
+
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+/* ===========================
+   Error
+=========================== */
+
+.otp-error {
+  color: #ef4444;
+  font-size: 14px;
+
+  margin-bottom: 18px;
+}
+
+/* ===========================
+   Verify Button
+=========================== */
+
+.verify-card button:first-of-type {
+  width: 100%;
+
+  padding: 16px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+
+  margin-top: 8px;
+}
+
+.verify-card button:first-of-type:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.verify-card button:first-of-type:disabled {
+  background: #9dbaf8;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   Resend OTP
+=========================== */
+
+.resend-btn {
+  width: 100%;
+
+  margin-top: 20px;
+
+  border: none;
+  background: transparent;
+
+  color: #2563eb;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.resend-btn:hover {
+  color: #1d4ed8;
+}
+
+.resend-btn.active {
+  color: #ef4444;
+}

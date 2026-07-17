@@ -1,0 +1,27 @@
+import express from 'express';
+import type { Express } from 'express';
+
+import authRoutes from './modules/auth/auth.routes.js';
+
+import { errorHandler } from './middleware/errorHandler.js';
+import { sendSuccess } from './shared/responses/apiResponse.js';
+
+const app: Express = express();
+
+app.use(express.json());
+
+app.use('/api/auth', authRoutes);
+
+app.get('/health', (_req, res) => {
+  return sendSuccess(res, 'CampusConnect API is running', {
+    timestamp: new Date().toISOString(),
+  });
+});
+
+app.get('/error', () => {
+  throw new Error('Testing Global Error Handler');
+});
+
+app.use(errorHandler);
+
+export default app;
