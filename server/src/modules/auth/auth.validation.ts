@@ -42,6 +42,15 @@ export const registerStudentSchema = z
       });
     }
   });
+export const verifyOtpSchema = z.object({
+  studentId: z.string().trim(),
+
+  otpCode: z
+    .string()
+    .length(6, "OTP must be 6 digits"),
+});
+
+export type VerifyOtpInput = z.infer<typeof verifyOtpSchema>;
 
 export type RegisterStudentInput = z.infer<
   typeof registerStudentSchema

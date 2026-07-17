@@ -6,7 +6,7 @@ import VerifyOtpForm from '../components/VerifyOtpForm';
 import '../styles/verifyOtp.css';
 
 interface LocationState {
-  studentId: number;
+  studentId: string;
   collegeEmail: string;
 }
 
@@ -23,8 +23,8 @@ const VerifyCollegeEmailPage = () => {
         </div>
 
         <VerifyOtpForm
-          studentId={state?.studentId ?? 101}
-          collegeEmail={state?.collegeEmail ?? 'student@psnacet.edu.in'}
+          studentId={state?.studentId ?? ''}
+          collegeEmail={state?.collegeEmail ?? ''}
         />
       </section>
     </main>
