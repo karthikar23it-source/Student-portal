@@ -1,14 +1,27 @@
-import dotenv from "dotenv";
-import app from "./app.js";
+import app from './app.js';
+import { connectDatabase } from './config/database.js';
+import { env } from './config/env.js';
 
-dotenv.config();
+const PORT = env.PORT;
 
-const PORT = process.env.PORT || 5000;
+const startServer = async (): Promise<void> => {
+  try {
+    // Connect Database
+    await connectDatabase();
 
-app.listen(PORT, () => {
-  console.log("=======================================");
-  console.log("🚀 CampusConnect Backend Started");
-  console.log(`🌍 Environment : ${process.env.NODE_ENV || "development"}`);
-  console.log(`🔗 Server      : http://localhost:${PORT}`);
-  console.log("=======================================");
-});
+    // Start Express Server
+    app.listen(PORT, () => {
+      console.log('=======================================');
+      console.log('🚀 CampusConnect Backend Started');
+      console.log(`🌍 Environment : ${env.NODE_ENV}`);
+      console.log(`🔗 Server      : http://localhost:${PORT}`);
+      console.log('=======================================');
+    });
+  } catch (error) {
+    console.error('Failed to start server');
+    console.error(error);
+    process.exit(1);
+  }
+};
+
+startServer();
