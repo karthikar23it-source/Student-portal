@@ -106,4 +106,32 @@ export class AuthService {
       message: "OTP resent",
     };
   }
+  async completeProfile(data: {
+  studentId: string;
+  fullName: string;
+  rollNumber: string;
+  department: string;
+  year: string;
+  section: string;
+}) {
+  // Find student
+  const student = await this.authRepository.findStudentById(data.studentId);
+
+  if (!student) {
+    throw new Error("STUDENT_NOT_FOUND");
+  }
+
+  // Ensure email is verified
+  if (!student.studentEmailVerified) {
+    throw new Error("EMAIL_NOT_VERIFIED");
+  }
+
+  // Update profile
+  await this.authRepository.completeProfile(data);
+
+  return {
+    success: true,
+    message: "Profile completed successfully.",
+  };
+}
 }

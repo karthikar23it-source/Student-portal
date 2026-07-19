@@ -13,8 +13,15 @@ router.post(
   "/verify-otp",
   authController.verifyOtp.bind(authController)
 );
+
 router.post(
   "/resend-otp",
   authController.resendOtp.bind(authController)
 );
+
+router.post(
+  "/complete-profile",
+  authController.completeProfile.bind(authController)
+);
+
 export default router;

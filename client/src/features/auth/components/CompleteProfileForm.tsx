@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaArrowLeft } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import { completeProfileSchema } from '../validation/completeProfile.validation';
@@ -12,8 +12,16 @@ import type {
   CompleteProfileRequest,
 } from '../types/completeProfile.types';
 
+interface LocationState {
+  studentId: string;
+  collegeEmail: string;
+}
+
 const CompleteProfileForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const { studentId } = (location.state || {}) as LocationState;
 
   const {
     register,
@@ -26,26 +34,17 @@ const CompleteProfileForm = () => {
   const onSubmit = async (data: CompleteProfileFormData) => {
     try {
       const payload: CompleteProfileRequest = {
-        studentId: '',
+        studentId,
         ...data,
       };
 
       const response = await completeProfile(payload);
 
-      console.log('Profile Completed');
       console.log(response);
 
-      /*
-        TODO (AUTH-003)
+      alert('Profile completed successfully.');
 
-        Backend will be implemented by another teammate.
-
-        If response.isEmailVerified === true
-            navigate('/login');
-
-        Else
-            navigate('/dashboard');
-      */
+      navigate('/login');
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         alert(error.response?.data?.message ?? 'Profile completion failed.');
@@ -58,7 +57,11 @@ const CompleteProfileForm = () => {
   return (
     <>
       <div className="profile-header">
-        <button type="button" className="back-button" onClick={() => navigate(-1)}>
+        <button
+          type="button"
+          className="back-button"
+          onClick={() => navigate(-1)}
+        >
           <FaArrowLeft />
         </button>
 
@@ -68,40 +71,65 @@ const CompleteProfileForm = () => {
       <p className="subtitle">Just a few details to set up your profile</p>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Full Name */}
         <div className="form-group">
           <label htmlFor="fullName">Full Name</label>
 
-          <input id="fullName" type="text" placeholder="Aarav Sharma" {...register('fullName')} />
+          <input
+            id="fullName"
+            type="text"
+            placeholder="Aarav Sharma"
+            {...register('fullName')}
+          />
 
-          {errors.fullName && <span className="error-message">{errors.fullName.message}</span>}
+          {errors.fullName && (
+            <span className="error-message">
+              {errors.fullName.message}
+            </span>
+          )}
         </div>
 
-        {/* Roll Number */}
         <div className="form-group">
           <label htmlFor="rollNumber">Roll Number</label>
 
-          <input id="rollNumber" type="text" placeholder="23IT012" {...register('rollNumber')} />
+          <input
+            id="rollNumber"
+            type="text"
+            placeholder="23IT012"
+            {...register('rollNumber')}
+          />
 
-          {errors.rollNumber && <span className="error-message">{errors.rollNumber.message}</span>}
+          {errors.rollNumber && (
+            <span className="error-message">
+              {errors.rollNumber.message}
+            </span>
+          )}
         </div>
 
-        {/* Department */}
         <div className="form-group">
           <label htmlFor="department">Department</label>
 
-          <select id="department" defaultValue="" {...register('department')}>
+          <select
+            id="department"
+            defaultValue=""
+            {...register('department')}
+          >
             <option value="">Select Department</option>
 
             <option value="Artificial Intelligence & Data Science">
               Artificial Intelligence & Data Science
             </option>
 
-            <option value="Biomedical Engineering">Biomedical Engineering</option>
+            <option value="Biomedical Engineering">
+              Biomedical Engineering
+            </option>
 
-            <option value="Civil Engineering">Civil Engineering</option>
+            <option value="Civil Engineering">
+              Civil Engineering
+            </option>
 
-            <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+            <option value="Computer Science & Engineering">
+              Computer Science & Engineering
+            </option>
 
             <option value="Electronics & Communication Engineering">
               Electronics & Communication Engineering
@@ -111,20 +139,31 @@ const CompleteProfileForm = () => {
               Electrical & Electronics Engineering
             </option>
 
-            <option value="Information Technology">Information Technology</option>
+            <option value="Information Technology">
+              Information Technology
+            </option>
 
-            <option value="Mechanical Engineering">Mechanical Engineering</option>
+            <option value="Mechanical Engineering">
+              Mechanical Engineering
+            </option>
           </select>
 
-          {errors.department && <span className="error-message">{errors.department.message}</span>}
+          {errors.department && (
+            <span className="error-message">
+              {errors.department.message}
+            </span>
+          )}
         </div>
 
-        {/* Year & Section */}
         <div className="profile-row">
           <div className="form-group half-width">
             <label htmlFor="year">Year</label>
 
-            <select id="year" defaultValue="" {...register('year')}>
+            <select
+              id="year"
+              defaultValue=""
+              {...register('year')}
+            >
               <option value="">Select Year</option>
               <option value="1st">1st</option>
               <option value="2nd">2nd</option>
@@ -132,13 +171,21 @@ const CompleteProfileForm = () => {
               <option value="4th">4th</option>
             </select>
 
-            {errors.year && <span className="error-message">{errors.year.message}</span>}
+            {errors.year && (
+              <span className="error-message">
+                {errors.year.message}
+              </span>
+            )}
           </div>
 
           <div className="form-group half-width">
             <label htmlFor="section">Section</label>
 
-            <select id="section" defaultValue="" {...register('section')}>
+            <select
+              id="section"
+              defaultValue=""
+              {...register('section')}
+            >
               <option value="">Select Section</option>
               <option value="A">A</option>
               <option value="B">B</option>
@@ -146,7 +193,11 @@ const CompleteProfileForm = () => {
               <option value="D">D</option>
             </select>
 
-            {errors.section && <span className="error-message">{errors.section.message}</span>}
+            {errors.section && (
+              <span className="error-message">
+                {errors.section.message}
+              </span>
+            )}
           </div>
         </div>
 

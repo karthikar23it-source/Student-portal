@@ -62,3 +62,16 @@ export const resendOtpSchema = z.object({
 export type ResendOtpInput = z.infer<
   typeof resendOtpSchema
 >;
+export const completeProfileSchema = z.object({
+  studentId: z.string().min(1, "Student ID is required"),
+
+  fullName: z.string().trim().min(1, "Full name is required"),
+
+  rollNumber: z.string().trim().min(1, "Roll number is required"),
+
+  department: z.string().trim().min(1, "Department is required"),
+
+  year: z.string().trim().min(1, "Year is required"),
+
+  section: z.string().trim().min(1, "Section is required"),
+});
