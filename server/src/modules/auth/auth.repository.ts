@@ -66,4 +66,26 @@ export class AuthRepository {
       }
     );
   }
+ async completeProfile(data: {
+  studentId: string;
+  fullName: string;
+  rollNumber: string;
+  department: string;
+  year: string;
+  section: string;
+}) {
+  return await Student.findByIdAndUpdate(
+    data.studentId,
+    {
+      fullName: data.fullName,
+      rollNumber: data.rollNumber,
+      department: data.department,
+      year: data.year,
+      section: data.section,
+    },
+    {
+      new: true,
+    }
+  );
+}
 }

@@ -9,6 +9,13 @@ export interface IStudent extends Document {
   otpCode?: string;
   otpExpiresAt?: Date;
 
+  // Profile fields
+  fullName?: string;
+  rollNumber?: string;
+  department?: string;
+  year?: string;
+  section?: string;
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -40,6 +47,40 @@ const studentSchema = new Schema<IStudent>(
 
     otpExpiresAt: {
       type: Date,
+      default: null,
+    },
+
+    // ==========================
+    // Complete Profile Fields
+    // ==========================
+
+    fullName: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
+    rollNumber: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
+    department: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
+    year: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
+    section: {
+      type: String,
+      trim: true,
       default: null,
     },
   },

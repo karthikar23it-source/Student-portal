@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import OtpInput from './OtpInput';
@@ -10,7 +11,12 @@ interface VerifyOtpFormProps {
   collegeEmail: string;
 }
 
-const VerifyOtpForm = ({ studentId, collegeEmail }: VerifyOtpFormProps) => {
+const VerifyOtpForm = ({
+  studentId,
+  collegeEmail,
+}: VerifyOtpFormProps) => {
+  const navigate = useNavigate();
+
   const [otp, setOtp] = useState<string[]>(Array(6).fill(''));
 
   const [loading, setLoading] = useState(false);
@@ -34,13 +40,12 @@ const VerifyOtpForm = ({ studentId, collegeEmail }: VerifyOtpFormProps) => {
         otpCode,
       });
 
-      /*
-      TODO (AUTH-003)
-
-      navigate("/complete-profile")
-      */
-
-      console.log('OTP Verified');
+      navigate('/complete-profile', {
+        state: {
+          studentId,
+          collegeEmail,
+        },
+      });
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         const backendError = err.response?.data?.error;
@@ -92,7 +97,10 @@ const VerifyOtpForm = ({ studentId, collegeEmail }: VerifyOtpFormProps) => {
 
       {error && <p className="otp-error">{error}</p>}
 
-      <button onClick={handleVerifyOtp} disabled={loading || otpCode.length !== 6}>
+      <button
+        onClick={handleVerifyOtp}
+        disabled={loading || otpCode.length !== 6}
+      >
         {loading ? 'Verifying...' : 'Verify OTP'}
       </button>
 

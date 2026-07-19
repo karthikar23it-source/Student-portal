@@ -1,14 +1,17 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGraduationCap } from 'react-icons/fa';
 import axios from 'axios';
 
 import { loginSchema } from '../validation/login.validation';
 import { loginStudent } from '../services/login.service';
+
 import type { LoginRequest } from '../types/login.types';
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -24,26 +27,21 @@ const LoginForm = () => {
       console.log('Login Successful');
       console.log(response);
 
-      /*
-      TODO (AUTH-004)
+      alert('Login successful.');
 
-      Backend will be implemented by another teammate.
-
-      Handle responses:
-
-      - Email not verified
-        navigate('/verify-email')
-
-      - Invalid credentials
-        Show inline error
-
-      - Success
-        Store auth token
-        Navigate('/dashboard')
-      */
+      // TODO: Change this to your dashboard route when it's ready
+      navigate('/dashboard');
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
-        alert(error.response?.data?.message ?? 'Login failed. Please try again.');
+        const backendError = error.response?.data?.error;
+
+        if (backendError === 'INVALID_PASSWORD') {
+          alert('Invalid password.');
+        } else if (backendError === 'STUDENT_NOT_FOUND') {
+          alert('Student not found.');
+        } else {
+          alert(error.response?.data?.message ?? 'Login failed. Please try again.');
+        }
       } else {
         alert('Something went wrong. Please try again.');
       }
@@ -74,7 +72,9 @@ const LoginForm = () => {
           />
 
           {errors.collegeEmail && (
-            <span className="error-message">{errors.collegeEmail.message}</span>
+            <span className="error-message">
+              {errors.collegeEmail.message}
+            </span>
           )}
         </div>
 
@@ -88,7 +88,11 @@ const LoginForm = () => {
             {...register('password')}
           />
 
-          {errors.password && <span className="error-message">{errors.password.message}</span>}
+          {errors.password && (
+            <span className="error-message">
+              {errors.password.message}
+            </span>
+          )}
         </div>
 
         <div className="forgot-password">
