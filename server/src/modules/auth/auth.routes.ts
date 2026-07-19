@@ -13,5 +13,8 @@ router.post(
   "/verify-otp",
   authController.verifyOtp.bind(authController)
 );
-
+router.post(
+  "/resend-otp",
+  authController.resendOtp.bind(authController)
+);
 export default router;

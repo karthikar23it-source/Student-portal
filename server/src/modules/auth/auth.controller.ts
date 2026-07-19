@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import {
   registerStudentSchema,
   verifyOtpSchema,
+  resendOtpSchema,
 } from "./auth.validation.js";
 import { AuthService } from "./auth.service.js";
 
@@ -95,4 +96,42 @@ export class AuthController {
       });
     }
   }
+  async resendOtp(req: Request, res: Response) {
+  try {
+    // Validate request body
+    const data = resendOtpSchema.parse(req.body);
+
+    // Call service
+    const result = await authService.resendOtp(
+      data.studentId
+    );
+
+    return res.status(200).json(result);
+  } catch (error: any) {
+    console.error("========== RESEND OTP ERROR ==========");
+    console.error(error);
+    console.error("======================================");
+
+    if (error.message === "STUDENT_NOT_FOUND") {
+      return res.status(404).json({
+        error: "STUDENT_NOT_FOUND",
+      });
+    }
+
+    if (error.message === "EMAIL_ALREADY_VERIFIED") {
+      return res.status(400).json({
+        error: "EMAIL_ALREADY_VERIFIED",
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+      stack:
+        process.env.NODE_ENV === "development"
+          ? error.stack
+          : undefined,
+    });
+  }
+}
 }

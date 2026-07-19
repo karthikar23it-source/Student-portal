@@ -55,3 +55,10 @@ export type VerifyOtpInput = z.infer<typeof verifyOtpSchema>;
 export type RegisterStudentInput = z.infer<
   typeof registerStudentSchema
 >;
+export const resendOtpSchema = z.object({
+  studentId: z.string().trim(),
+});
+
+export type ResendOtpInput = z.infer<
+  typeof resendOtpSchema
+>;
