@@ -9,4 +9,9 @@ router.post(
   authController.registerStudent.bind(authController)
 );
 
+router.post(
+  "/verify-otp",
+  authController.verifyOtp.bind(authController)
+);
+
 export default router;

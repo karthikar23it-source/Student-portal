@@ -5,9 +5,24 @@ export interface RegisterStudentRequest {
 }
 
 export interface RegisterStudentResponse {
-  success: boolean;
+  studentId: string;
   message: string;
-  data: {
-    studentId: string;
-  };
+}
+export interface VerifyOtpRequest {
+  studentId: string;
+  otpCode: string;
+}
+
+export interface VerifyOtpResponse {
+  success: boolean;
+  message?: string;
+}
+
+export interface ResendOtpRequest {
+  studentId: string;
+}
+
+export interface ResendOtpResponse {
+  success: boolean;
+  message?: string;
 }

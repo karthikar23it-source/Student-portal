@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGraduationCap } from 'react-icons/fa';
 import axios from 'axios';
 
@@ -9,10 +9,11 @@ import { registerStudent } from '../services/auth.service';
 import type { RegisterStudentRequest } from '../types/auth.types';
 
 const CreateAccountForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isSubmitting },
   } = useForm<RegisterStudentRequest>({
     resolver: zodResolver(registerSchema),
@@ -25,21 +26,12 @@ const CreateAccountForm = () => {
       console.log('Registration Successful');
       console.log(response);
 
-      reset();
-
-      /*
-      TODO (AUTH-002)
-
-      When Verify College Email screen is completed,
-      replace this section with:
-
-      navigate("/verify-email", {
-        state: {
-          studentId: response.data.studentId,
-          collegeEmail: data.collegeEmail,
-        },
-      });
-      */
+navigate('/verify-email', {
+  state: {
+    studentId: response.studentId,
+    collegeEmail: data.collegeEmail,
+  },
+});
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         alert(error.response?.data?.message ?? 'Registration failed. Please try again.');
@@ -85,7 +77,9 @@ const CreateAccountForm = () => {
             {...register('password')}
           />
 
-          {errors.password && <span className="error-message">{errors.password.message}</span>}
+          {errors.password && (
+            <span className="error-message">{errors.password.message}</span>
+          )}
         </div>
 
         <div className="form-group">

@@ -2,6 +2,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import CreateAccountPage from './features/auth/pages/CreateAccountPage';
 import VerifyCollegeEmailPage from './features/auth/pages/VerifyCollegeEmailPage';
+import LoginPage from './features/auth/pages/LoginPage';
+import CompleteProfilePage from './features/auth/pages/CompleteProfilePage';
 
 function App() {
   return (
@@ -15,13 +17,11 @@ function App() {
       {/* AUTH-002 */}
       <Route path="/verify-email" element={<VerifyCollegeEmailPage />} />
 
-      {/* AUTH-004 (Coming Soon) */}
-      {/*
-      <Route
-        path="/login"
-        element={<LoginPage />}
-      />
-      */}
+      {/* AUTH-003 */}
+      <Route path="/complete-profile" element={<CompleteProfilePage />} />
+
+      {/* AUTH-004 */}
+      <Route path="/login" element={<LoginPage />} />
 
       {/* Fallback Route */}
       <Route path="*" element={<Navigate to="/register" replace />} />
