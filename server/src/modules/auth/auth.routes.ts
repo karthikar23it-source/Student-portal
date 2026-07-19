@@ -23,5 +23,8 @@ router.post(
   "/complete-profile",
   authController.completeProfile.bind(authController)
 );
-
+router.post(
+  "/login",
+  authController.loginStudent.bind(authController)
+);
 export default router;

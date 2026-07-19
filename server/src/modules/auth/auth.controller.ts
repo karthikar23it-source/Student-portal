@@ -4,6 +4,7 @@ import {
   verifyOtpSchema,
   resendOtpSchema,
   completeProfileSchema,
+  loginStudentSchema,
 } from "./auth.validation.js";
 import { AuthService } from "./auth.service.js";
 
@@ -164,4 +165,43 @@ export class AuthController {
       });
     }
   }
+  async loginStudent(req: Request, res: Response) {
+  try {
+    // Validate request body
+    const data = loginStudentSchema.parse(req.body);
+
+    // Call service
+    const result = await authService.loginStudent(
+      data.collegeEmail,
+      data.password
+    );
+
+    return res.status(200).json(result);
+  } catch (error: any) {
+    console.error("========== LOGIN ERROR ==========");
+    console.error(error);
+    console.error("=================================");
+
+    if (error.message === "STUDENT_NOT_FOUND") {
+      return res.status(404).json({
+        error: "STUDENT_NOT_FOUND",
+      });
+    }
+
+    if (error.message === "INVALID_PASSWORD") {
+      return res.status(401).json({
+        error: "INVALID_PASSWORD",
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+      stack:
+        process.env.NODE_ENV === "development"
+          ? error.stack
+          : undefined,
+    });
+  }
+}
 }

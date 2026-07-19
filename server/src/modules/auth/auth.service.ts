@@ -1,5 +1,8 @@
 import { AuthRepository } from "./auth.repository.js";
-import { hashPassword } from "../../utils/password.js";
+import {
+  hashPassword,
+  comparePassword,
+} from "../../utils/password.js";
 import { generateOtp, getOtpExpiry } from "../../utils/otp.js";
 import { sendOtpEmail } from "../../utils/email.js";
 
@@ -132,6 +135,35 @@ export class AuthService {
   return {
     success: true,
     message: "Profile completed successfully.",
+  };
+}
+async loginStudent(
+  collegeEmail: string,
+  password: string
+) {
+  // Find student
+  const student = await this.authRepository.findStudentByEmail(
+    collegeEmail
+  );
+
+  if (!student) {
+    throw new Error("STUDENT_NOT_FOUND");
+  }
+
+  // Compare password
+  const isPasswordValid = await comparePassword(
+    password,
+    student.password
+  );
+
+  if (!isPasswordValid) {
+    throw new Error("INVALID_PASSWORD");
+  }
+
+  return {
+    success: true,
+    message: "Login successful.",
+    studentId: student._id,
   };
 }
 }

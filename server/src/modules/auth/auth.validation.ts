@@ -75,3 +75,12 @@ export const completeProfileSchema = z.object({
 
   section: z.string().trim().min(1, "Section is required"),
 });
+export const loginStudentSchema = z.object({
+  collegeEmail: z
+    .string()
+    .email("Invalid college email"),
+
+  password: z
+    .string()
+    .min(1, "Password is required"),
+});
