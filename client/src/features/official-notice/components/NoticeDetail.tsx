@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   viewNoticeDetail,
   downloadAttachment,
-} from '../services/notice.service';
+} from "../services/notice.service";
 
-import type { Notice } from '../types/notice.types';
+import type { NoticeDetailResponse } from "../types/notice.types";
 
 const NoticeDetail = () => {
   const { noticeId } = useParams();
+  const navigate = useNavigate();
 
-  const [notice, setNotice] = useState<Notice | null>(null);
+  const [notice, setNotice] =
+    useState<NoticeDetailResponse | null>(null);
 
   useEffect(() => {
     if (!noticeId) return;
@@ -19,7 +21,7 @@ const NoticeDetail = () => {
     const fetchNotice = async () => {
       try {
         const response = await viewNoticeDetail(noticeId);
-        setNotice(response.notice);
+        setNotice(response);
       } catch (error) {
         console.error(error);
       }
@@ -34,15 +36,26 @@ const NoticeDetail = () => {
 
   return (
     <>
-      <span className="notice-category">
-        {notice.category}
-      </span>
+      <div className="notice-header">
+        <button
+          className="back-btn"
+          onClick={() => navigate(-1)}
+        >
+          ← Back
+        </button>
+
+        <span className="notice-category">
+          {notice.category}
+        </span>
+      </div>
 
       <h1>{notice.title}</h1>
 
       <p className="notice-meta">
-        {notice.postedBy} •{' '}
-        {new Date(notice.createdAt).toLocaleString()}
+        📢 {notice.postedBy}
+        <br />
+        🗓{" "}
+        {new Date(notice.publishedAt).toLocaleString()}
       </p>
 
       <div className="notice-description">
@@ -51,11 +64,12 @@ const NoticeDetail = () => {
 
       {notice.attachmentUrl && (
         <button
+          className="attachment-btn"
           onClick={() =>
             downloadAttachment(notice.attachmentUrl!)
           }
         >
-          View Attached Timetable
+          📄 View Attachment
         </button>
       )}
     </>

@@ -1,41 +1,118 @@
 .notice-page {
+  min-height: 100vh;
+  background: #f5f7fb;
   display: flex;
   justify-content: center;
-  padding: 2rem;
+  padding: 3rem 1rem;
 }
 
 .notice-container {
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.notice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.back-btn {
+  background: transparent;
+  border: none;
+  color: #2563eb;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
 }
 
 .notice-category {
   display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding: 8px 18px;
+  border-radius: 999px;
   background: #e8f1ff;
   color: #2563eb;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.notice-container h1 {
+  text-align: center;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.15;
+  margin: 20px 0;
+  color: #111827;
 }
 
 .notice-meta {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 15px;
+  margin-bottom: 30px;
+  line-height: 1.8;
 }
 
 .notice-description {
-  background: #f8f8f8;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
+  background: #f9fafb;
+  border-left: 5px solid #2563eb;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
 }
 
-button {
-  padding: 12px 20px;
+.notice-description p {
+  margin: 0;
+  color: #374151;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.attachment-btn {
+  display: block;
+  margin: 0 auto;
+  background: #2563eb;
+  color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
+  transition: 0.25s;
+}
+
+.attachment-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .notice-container {
+    padding: 1.5rem;
+  }
+
+  .notice-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .notice-container h1 {
+    font-size: 2rem;
+  }
+
+  .notice-description p {
+    font-size: 16px;
+  }
 }

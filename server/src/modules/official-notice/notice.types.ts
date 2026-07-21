@@ -5,5 +5,5 @@ export interface NoticeDetailResponse {
   postedBy: string;
   description: string;
   attachmentUrl?: string;
-  publishedAt: string;
+  publishedAt: Date;
 }
