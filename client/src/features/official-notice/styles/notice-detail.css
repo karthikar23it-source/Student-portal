@@ -1,0 +1,41 @@
+.notice-page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.notice-container {
+  width: 100%;
+  max-width: 700px;
+}
+
+.notice-category {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #e8f1ff;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.notice-meta {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.notice-description {
+  background: #f8f8f8;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
