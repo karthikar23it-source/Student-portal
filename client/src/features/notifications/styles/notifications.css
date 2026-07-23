@@ -1,0 +1,135 @@
+.notifications-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+  padding: 30px 20px;
+}
+
+.notifications-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.notifications-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 24px;
+}
+
+/* Featured Reminder Card */
+
+.featured-reminder-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #2563eb;
+  color: #fff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.featured-reminder-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+.featured-icon {
+  font-size: 2rem;
+  margin-right: 16px;
+}
+
+.featured-content {
+  flex: 1;
+}
+
+.featured-content h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.featured-content p {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.featured-arrow {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Notification List */
+
+.notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.notification-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.notification-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.notification-icon {
+  font-size: 1.8rem;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-content h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #111827;
+}
+
+.notification-content p {
+  margin-top: 6px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.notification-time {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+.notification-status {
+  text-align: center;
+  color: #6b7280;
+  padding: 30px;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .featured-reminder-card,
+  .notification-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .featured-arrow,
+  .notification-time {
+    align-self: flex-end;
+  }
+
+  .notifications-title {
+    font-size: 1.6rem;
+  }
+}

@@ -4,6 +4,7 @@ import CreateAccountPage from './features/auth/pages/CreateAccountPage';
 import VerifyCollegeEmailPage from './features/auth/pages/VerifyCollegeEmailPage';
 import LoginPage from './features/auth/pages/LoginPage';
 import CompleteProfilePage from './features/auth/pages/CompleteProfilePage';
+import NotificationsPage from "./features/notifications/pages/NotificationsPage";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
 
       {/* AUTH-004 */}
       <Route path="/login" element={<LoginPage />} />
+
+      <Route path="/notifications" element={<NotificationsPage />} />
 
       {/* Fallback Route */}
       <Route path="*" element={<Navigate to="/register" replace />} />
