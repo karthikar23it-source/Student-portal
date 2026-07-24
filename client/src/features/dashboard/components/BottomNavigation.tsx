@@ -1,32 +1,66 @@
-import { House, FileText, BriefcaseBusiness, Bell, User } from 'lucide-react';
+import { Bell, BriefcaseBusiness, FileText, Home, User } from 'lucide-react';
 
 const BottomNavigation = () => {
   return (
-    <nav className="sticky bottom-0 z-20 border-t bg-white">
-      <div className="flex items-center justify-around py-2">
-        <button className="flex flex-col items-center text-blue-600">
-          <House size={22} />
-          <span className="mt-1 text-xs font-medium">Home</span>
+    <nav
+      className="
+        sticky
+        bottom-0
+        border-t
+        border-[#E8EDF5]
+        bg-white
+        px-5
+        py-3
+      "
+    >
+      <div className="flex items-center justify-around">
+        {/* Home */}
+        <button className="flex flex-col items-center gap-1">
+          <div
+            className="
+              flex
+              h-9
+              w-11
+              items-center
+              justify-center
+              rounded-full
+              bg-[#E8F0FF]
+            "
+          >
+            <Home size={19} strokeWidth={2.3} className="text-[#2563EB]" />
+          </div>
+
+          <span className="text-[11px] font-semibold text-[#2563EB]">Home</span>
         </button>
 
-        <button className="flex flex-col items-center text-gray-500 hover:text-blue-600">
-          <FileText size={22} />
-          <span className="mt-1 text-xs">Notices</span>
+        {/* Notices */}
+        <button className="flex flex-col items-center gap-1">
+          <FileText size={19} strokeWidth={2} className="text-[#6B7280]" />
+
+          <span className="text-[11px] text-[#6B7280]">Notices</span>
         </button>
 
-        <button className="flex flex-col items-center text-gray-500 hover:text-blue-600">
-          <BriefcaseBusiness size={22} />
-          <span className="mt-1 text-xs">Opps</span>
+        {/* Opportunities */}
+        <button className="flex flex-col items-center gap-1">
+          <BriefcaseBusiness size={19} strokeWidth={2} className="text-[#6B7280]" />
+
+          <span className="text-[11px] text-[#6B7280]">Opps</span>
         </button>
 
-        <button className="flex flex-col items-center text-gray-500 hover:text-blue-600">
-          <Bell size={22} />
-          <span className="mt-1 text-xs">Alerts</span>
+        {/* Alerts */}
+        <button className="relative flex flex-col items-center gap-1">
+          <Bell size={19} strokeWidth={2} className="text-[#6B7280]" />
+
+          <span className="text-[11px] text-[#6B7280]">Alerts</span>
+
+          <span className="absolute right-1 top-0 h-2 w-2 rounded-full bg-[#EF4444]" />
         </button>
 
-        <button className="flex flex-col items-center text-gray-500 hover:text-blue-600">
-          <User size={22} />
-          <span className="mt-1 text-xs">Profile</span>
+        {/* Profile */}
+        <button className="flex flex-col items-center gap-1">
+          <User size={19} strokeWidth={2} className="text-[#6B7280]" />
+
+          <span className="text-[11px] text-[#6B7280]">Profile</span>
         </button>
       </div>
     </nav>

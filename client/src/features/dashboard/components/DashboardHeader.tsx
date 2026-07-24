@@ -7,19 +7,45 @@ interface DashboardHeaderProps {
 
 const DashboardHeader = ({ studentFirstName, unreadNotifications = 0 }: DashboardHeaderProps) => {
   return (
-    <header className="sticky top-0 z-20 bg-white border-b px-5 py-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm text-gray-500">Good morning,</p>
+    <header className="bg-white px-6 pt-5 pb-6">
+      <div className="flex items-start justify-between">
+        <div className="pt-1">
+          <p className="text-[14px] font-normal leading-none text-[#6B7280]">Good morning,</p>
 
-          <h1 className="text-2xl font-bold text-gray-900">{studentFirstName} 👋</h1>
+          <h1 className="mt-3 flex items-center text-[32px] font-bold leading-none tracking-[-0.8px] text-black">
+            {studentFirstName}
+
+            <span className="ml-2 text-[24px]">👋</span>
+          </h1>
         </div>
 
-        <button className="relative rounded-full p-2 transition hover:bg-gray-100">
-          <Bell size={24} />
+        <button
+          className="
+            relative
+            flex
+            h-[50px]
+            w-[50px]
+            items-center
+            justify-center
+            rounded-full
+            bg-[#EEF4FF]
+            shadow-sm
+          "
+        >
+          <Bell size={21} strokeWidth={2} className="text-[#374151]" />
 
           {unreadNotifications > 0 && (
-            <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-red-500" />
+            <span
+              className="
+                absolute
+                right-[13px]
+                top-[13px]
+                h-[8px]
+                w-[8px]
+                rounded-full
+                bg-[#2563EB]
+              "
+            />
           )}
         </button>
       </div>
