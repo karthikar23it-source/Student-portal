@@ -1,9 +1,11 @@
 export interface Notification {
-  id: string;
-  type: string;
+  notificationId: number;
+  type: "OPPORTUNITY_UPDATE" | "APPLICATION_UPDATE" | "REMINDER";
   title: string;
-  message: string;
-  relativeTime: string;
+  isRead: boolean;
+  createdAt: string;
 }
 
-export type NotificationListResponse = Notification[];
+export interface NotificationListResponse {
+  notifications: Notification[];
+}

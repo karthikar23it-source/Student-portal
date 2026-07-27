@@ -15,7 +15,7 @@ const NotificationList = () => {
   const fetchNotifications = async () => {
     try {
       const data = await loadNotifications();
-      setNotifications(data);
+      setNotifications(data.notifications);
     } catch (error) {
       console.error("Failed to load notifications:", error);
     } finally {
@@ -37,7 +37,7 @@ const NotificationList = () => {
         <div className="notification-list">
           {notifications.map((notification) => (
             <NotificationCard
-              key={notification.id}
+              key={notification.notificationId}
               notification={notification}
             />
           ))}

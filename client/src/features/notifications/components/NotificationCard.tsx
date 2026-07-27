@@ -4,20 +4,15 @@ interface NotificationCardProps {
   notification: Notification;
 }
 
-const NotificationCard = ({
-  notification,
-}: NotificationCardProps) => {
+const NotificationCard = ({ notification }: NotificationCardProps) => {
   const getIcon = () => {
     switch (notification.type) {
       case "OPPORTUNITY_UPDATE":
         return "🚀";
-
       case "APPLICATION_UPDATE":
         return "📄";
-
       case "REMINDER":
         return "⏰";
-
       default:
         return "🔔";
     }
@@ -25,18 +20,16 @@ const NotificationCard = ({
 
   return (
     <div className="notification-card">
-      <div className="notification-icon">
-        {getIcon()}
-      </div>
+      <div className="notification-icon">{getIcon()}</div>
 
       <div className="notification-content">
         <h4>{notification.title}</h4>
 
-        <p>{notification.message}</p>
+        <p>{notification.type.replace("_", " ")}</p>
       </div>
 
       <span className="notification-time">
-        {notification.relativeTime}
+        {new Date(notification.createdAt).toLocaleString()}
       </span>
     </div>
   );

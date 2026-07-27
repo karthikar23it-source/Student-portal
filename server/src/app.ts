@@ -8,7 +8,7 @@ import authRoutes from "./modules/auth/auth.routes.js";
 
 import { errorHandler } from "./middleware/errorHandler.js";
 import { sendSuccess } from "./shared/responses/apiResponse.js";
-
+import notificationRoutes from "./modules/notifications/notification.routes.js";
 const app: Express = express();
 
 app.use(
@@ -32,6 +32,7 @@ app.get("/error", () => {
   throw new Error("Testing Global Error Handler");
 });
 
+app.use("/api/notifications", notificationRoutes);
 app.use(errorHandler);
 
 export default app;
