@@ -7,6 +7,9 @@ import LoginPage from './features/auth/pages/LoginPage';
 
 import OfficialNotices from './features/officialNotices/pages/OfficialNotices';
 
+// NEW IMPORT
+import PostOpportunityPage from './features/opportunities/pages/PostOpportunityPage';
+
 function App() {
   return (
     <Routes>
@@ -21,6 +24,9 @@ function App() {
 
       {/* Sprint 3 */}
       <Route path="/official-notices" element={<OfficialNotices />} />
+
+      {/* Sprint 5 - Post Opportunity */}
+      <Route path="/post-opportunity" element={<PostOpportunityPage />} />
 
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/register" replace />} />
