@@ -1,10 +1,12 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import CreateAccountPage from './features/auth/pages/CreateAccountPage';
-import VerifyCollegeEmailPage from './features/auth/pages/VerifyCollegeEmailPage';
-import LoginPage from './features/auth/pages/LoginPage';
-import CompleteProfilePage from './features/auth/pages/CompleteProfilePage';
-import NoticeDetailPage from './features/official-notice/pages/NoticeDetailPage';
+import CreateAccountPage from "./features/auth/pages/CreateAccountPage";
+import VerifyCollegeEmailPage from "./features/auth/pages/VerifyCollegeEmailPage";
+import CompleteProfilePage from "./features/auth/pages/CompleteProfilePage";
+import LoginPage from "./features/auth/pages/LoginPage";
+
+import OfficialNotices from "./features/officialNotices/pages/OfficialNotices";
+import NoticeDetailPage from "./features/official-notice/pages/NoticeDetailPage";
 
 function App() {
   return (
@@ -12,23 +14,21 @@ function App() {
       {/* Default Route */}
       <Route path="/" element={<Navigate to="/register" replace />} />
 
-      {/* AUTH-001 */}
+      {/* Authentication */}
       <Route path="/register" element={<CreateAccountPage />} />
-
-      {/* AUTH-002 */}
       <Route path="/verify-email" element={<VerifyCollegeEmailPage />} />
-
-      {/* AUTH-003 */}
       <Route path="/complete-profile" element={<CompleteProfilePage />} />
-
-      {/* AUTH-004 */}
       <Route path="/login" element={<LoginPage />} />
 
-      {/* Fallback Route */}
-      <Route path="*" element={<Navigate to="/register" replace />} />
+      {/* Official Notices */}
+      <Route path="/official-notices" element={<OfficialNotices />} />
+      <Route
+        path="/official-notice/:noticeId"
+        element={<NoticeDetailPage />}
+      />
 
-      <Route path="/official-notice/:noticeId" element={<NoticeDetailPage />}
-/>
+      {/* Fallback */}
+      <Route path="*" element={<Navigate to="/register" replace />} />
     </Routes>
   );
 }

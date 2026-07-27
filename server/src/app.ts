@@ -5,7 +5,13 @@ import cors from "cors";
 import { env } from "./config/env.js";
 
 import authRoutes from "./modules/auth/auth.routes.js";
+
+// Friend's module (Official Notices List)
+import officialNoticeRoutes from "./modules/officialNotice/officialNotice.routes.js";
+
+// Your module (Notice Detail)
 import noticeRoutes from "./modules/official-notice/notice.routes.js";
+
 import { errorHandler } from "./middleware/errorHandler.js";
 import { sendSuccess } from "./shared/responses/apiResponse.js";
 
@@ -22,6 +28,12 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 
+// Official Notices List
+app.use("/api/notices", officialNoticeRoutes);
+
+// Official Notice Detail
+app.use("/api/notices", noticeRoutes);
+
 app.get("/health", (_req, res) => {
   return sendSuccess(res, "CampusConnect API is running", {
     timestamp: new Date().toISOString(),
@@ -33,5 +45,5 @@ app.get("/error", () => {
 });
 
 app.use(errorHandler);
-app.use("/api/notices", noticeRoutes);
+
 export default app;
