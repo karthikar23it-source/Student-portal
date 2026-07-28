@@ -5,7 +5,7 @@ import VerifyCollegeEmailPage from './features/auth/pages/VerifyCollegeEmailPage
 import LoginPage from './features/auth/pages/LoginPage';
 import CompleteProfilePage from './features/auth/pages/CompleteProfilePage';
 import NotificationsPage from "./features/notifications/pages/NotificationsPage";
-
+import DeadlineReminderPage from "./features/notifications/pages/DeadlineReminderPage";
 function App() {
   return (
     <Routes>
@@ -25,6 +25,10 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
 
       <Route path="/notifications" element={<NotificationsPage />} />
+      <Route
+  path="/notifications/reminders"
+  element={<DeadlineReminderPage />}
+/>
 
       {/* Fallback Route */}
       <Route path="*" element={<Navigate to="/register" replace />} />
