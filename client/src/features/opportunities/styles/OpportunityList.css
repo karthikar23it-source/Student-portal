@@ -1,0 +1,221 @@
+/* ===========================
+   Opportunity List Page
+=========================== */
+
+.opportunity-page {
+  max-width: 420px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #ffffff;
+  position: relative;
+  padding: 20px 18px 100px;
+  font-family: Inter, sans-serif;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.opportunity-header {
+  margin-bottom: 20px;
+}
+
+.page-title {
+  margin: 0 0 18px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* ===========================
+   Search
+=========================== */
+
+.search-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.search-bar {
+  flex: 1;
+  height: 48px;
+  border-radius: 14px;
+  background: #eef3fb;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.search-input::placeholder {
+  color: #64748b;
+}
+
+.search-icon {
+  font-size: 16px;
+  color: #64748b;
+}
+
+.filter-button {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 14px;
+  background: #eef3fb;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.filter-button:hover {
+  background: #e2e8f0;
+}
+
+/* ===========================
+   Content
+=========================== */
+
+.opportunity-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.opportunity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===========================
+   Opportunity Card
+=========================== */
+
+.opportunity-card {
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid #edf2f7;
+  padding: 18px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.opportunity-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-tag {
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 5px 12px;
+  text-transform: uppercase;
+}
+
+.deadline-label {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.opportunity-title {
+  margin: 16px 0 6px;
+  font-size: 22px;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.organization-name {
+  margin: 0;
+  color: #64748b;
+  font-size: 15px;
+}
+
+.opportunity-card-footer {
+  display: flex;
+  gap: 24px;
+  margin-top: 18px;
+}
+
+.card-action {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #475569;
+  font-size: 14px;
+}
+
+.card-action:hover {
+  color: #2563eb;
+}
+
+/* ===========================
+   Floating Button
+=========================== */
+
+.floating-button {
+  position: fixed;
+  bottom: 90px;
+  right: 30px;
+  width: 58px;
+  height: 58px;
+  border: none;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #fff;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+}
+
+.floating-button:hover {
+  background: #1d4ed8;
+}
+
+/* ===========================
+   Loading
+=========================== */
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  color: #64748b;
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width: 480px) {
+  .opportunity-page {
+    padding: 16px 14px 100px;
+  }
+
+  .page-title {
+    font-size: 26px;
+  }
+
+  .opportunity-title {
+    font-size: 20px;
+  }
+
+  .floating-button {
+    right: 20px;
+  }
+}

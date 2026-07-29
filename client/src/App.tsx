@@ -1,34 +1,12 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import CreateAccountPage from './features/auth/pages/CreateAccountPage';
-import VerifyCollegeEmailPage from './features/auth/pages/VerifyCollegeEmailPage';
-import CompleteProfilePage from './features/auth/pages/CompleteProfilePage';
-import LoginPage from './features/auth/pages/LoginPage';
-
-import OfficialNotices from './features/officialNotices/pages/OfficialNotices';
-
-// NEW IMPORT
-import PostOpportunityPage from './features/opportunities/pages/PostOpportunityPage';
-
 function App() {
   return (
     <Routes>
-      {/* Default Route */}
       <Route path="/" element={<Navigate to="/register" replace />} />
 
-      {/* Authentication */}
-      <Route path="/register" element={<CreateAccountPage />} />
-      <Route path="/verify-email" element={<VerifyCollegeEmailPage />} />
-      <Route path="/complete-profile" element={<CompleteProfilePage />} />
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/opportunities" element={<h1>OPPORTUNITY PAGE WORKS</h1>} />
 
-      {/* Sprint 3 */}
-      <Route path="/official-notices" element={<OfficialNotices />} />
-
-      {/* Sprint 5 - Post Opportunity */}
-      <Route path="/post-opportunity" element={<PostOpportunityPage />} />
-
-      {/* Fallback */}
       <Route path="*" element={<Navigate to="/register" replace />} />
     </Routes>
   );
