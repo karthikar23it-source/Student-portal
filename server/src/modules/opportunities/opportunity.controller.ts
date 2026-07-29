@@ -22,7 +22,6 @@ export class OpportunityController {
       console.error(error);
       console.error("======================================");
 
-      // Handle duplicate opportunity
       if (
         typeof error.message === "string" &&
         error.message.startsWith("DUPLICATE_OPPORTUNITY:")
@@ -182,6 +181,45 @@ export class OpportunityController {
           error: "ALREADY_UPVOTED",
         });
       }
+
+      if (error.message === "OPPORTUNITY_NOT_FOUND") {
+        return res.status(404).json({
+          error: "OPPORTUNITY_NOT_FOUND",
+        });
+      }
+
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+        stack:
+          process.env.NODE_ENV === "development"
+            ? error.stack
+            : undefined,
+      });
+    }
+  }
+
+  /**
+   * Report opportunity
+   * POST /api/opportunities/:opportunityId/report
+   */
+  async reportOpportunity(req: Request, res: Response) {
+    try {
+      const { opportunityId } = req.params;
+      const { studentId, reason } = req.body;
+
+      const result =
+        await opportunityService.reportOpportunity(
+          opportunityId,
+          String(studentId),
+          String(reason)
+        );
+
+      return res.status(201).json(result);
+    } catch (error: any) {
+      console.error("====== REPORT OPPORTUNITY ERROR ======");
+      console.error(error);
+      console.error("======================================");
 
       if (error.message === "OPPORTUNITY_NOT_FOUND") {
         return res.status(404).json({

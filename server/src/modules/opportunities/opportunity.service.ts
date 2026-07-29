@@ -42,17 +42,11 @@ export class OpportunityService {
     const createdOpportunity =
       await this.opportunityRepository.createOpportunity({
         postedByStudentId: data.postedByStudentId,
-
         title: data.title,
-
         organization: data.organization,
-
         category: data.category,
-
         deadline: new Date(data.deadline),
-
         description: data.description,
-
         sourceUrl: data.sourceUrl,
       });
 
@@ -164,6 +158,21 @@ export class OpportunityService {
     return this.opportunityRepository.upvoteOpportunity(
       opportunityId,
       studentId
+    );
+  }
+
+  /**
+   * Report an opportunity
+   */
+  async reportOpportunity(
+    opportunityId: string,
+    studentId: string,
+    reason: string
+  ) {
+    return this.opportunityRepository.reportOpportunity(
+      opportunityId,
+      studentId,
+      reason
     );
   }
 }

@@ -1,6 +1,7 @@
 import { Opportunity } from "./models/opportunity.model.js";
 import type { IOpportunity } from "./models/opportunity.model.js";
 import { OpportunityUpvote } from "./models/opportunity-upvote.model.js";
+import { OpportunityReport } from "./models/opportunity-report.model.js";
 
 export class OpportunityRepository {
   /**
@@ -205,7 +206,6 @@ export class OpportunityRepository {
         opportunityId,
       });
     } catch (error: any) {
-      // Duplicate upvote
       if (error.code === 11000) {
         throw new Error("ALREADY_UPVOTED");
       }
@@ -230,6 +230,38 @@ export class OpportunityRepository {
     return {
       upvoted: true,
       newCount: updatedOpportunity?.upvoteCount ?? 0,
+    };
+  }
+
+  /**
+   * Report an opportunity
+   */
+  async reportOpportunity(
+    opportunityId: string,
+    studentId: string,
+    reason: string
+  ) {
+    // Check whether opportunity exists
+    const opportunity = await Opportunity.findOne({
+      _id: opportunityId,
+      isArchived: false,
+    });
+
+    if (!opportunity) {
+      throw new Error("OPPORTUNITY_NOT_FOUND");
+    }
+
+    // Create report
+    const report = await OpportunityReport.create({
+      studentId,
+      opportunityId,
+      reason,
+      status: "pending",
+    });
+
+    return {
+      reportId: report._id,
+      status: report.status,
     };
   }
 }
