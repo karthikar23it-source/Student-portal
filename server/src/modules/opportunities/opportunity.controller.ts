@@ -78,4 +78,40 @@ export class OpportunityController {
       });
     }
   }
+
+  /**
+   * View opportunity detail
+   * GET /api/opportunities/:opportunityId
+   */
+  async viewOpportunityDetail(req: Request, res: Response) {
+    try {
+      const { opportunityId } = req.params;
+
+      const result =
+        await opportunityService.viewOpportunityDetail(
+          opportunityId
+        );
+
+      return res.status(200).json(result);
+    } catch (error: any) {
+      console.error("====== VIEW OPPORTUNITY DETAIL ERROR ======");
+      console.error(error);
+      console.error("===========================================");
+
+      if (error.message === "OPPORTUNITY_NOT_FOUND") {
+        return res.status(404).json({
+          error: "OPPORTUNITY_NOT_FOUND",
+        });
+      }
+
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+        stack:
+          process.env.NODE_ENV === "development"
+            ? error.stack
+            : undefined,
+      });
+    }
+  }
 }

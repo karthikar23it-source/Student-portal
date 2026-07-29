@@ -16,6 +16,15 @@ router.get(
 );
 
 /**
+ * View opportunity detail
+ * GET /api/opportunities/:opportunityId
+ */
+router.get(
+  "/:opportunityId",
+  opportunityController.viewOpportunityDetail.bind(opportunityController)
+);
+
+/**
  * Create opportunity
  * POST /api/opportunities
  */

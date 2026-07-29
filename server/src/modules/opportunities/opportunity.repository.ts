@@ -54,4 +54,16 @@ export class OpportunityRepository {
       total,
     };
   }
+
+  /**
+   * View opportunity detail
+   */
+  async viewOpportunityDetail(
+    opportunityId: string
+  ): Promise<IOpportunity | null> {
+    return Opportunity.findOne({
+      _id: opportunityId,
+      isArchived: false,
+    });
+  }
 }

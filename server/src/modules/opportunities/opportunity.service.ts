@@ -83,4 +83,37 @@ export class OpportunityService {
       })),
     };
   }
+
+  /**
+   * View opportunity detail
+   */
+  async viewOpportunityDetail(opportunityId: string) {
+    const opportunity =
+      await this.opportunityRepository.viewOpportunityDetail(
+        opportunityId
+      );
+
+    if (!opportunity) {
+      throw new Error("OPPORTUNITY_NOT_FOUND");
+    }
+
+    return {
+      opportunityId: opportunity._id,
+      postedByStudentId: opportunity.postedByStudentId,
+      title: opportunity.title,
+      organization: opportunity.organization,
+      category: opportunity.category,
+      deadline: opportunity.deadline,
+      description: opportunity.description,
+      sourceUrl: opportunity.sourceUrl,
+      upvoteCount: opportunity.upvoteCount,
+      isArchived: opportunity.isArchived,
+      createdAt: opportunity.createdAt,
+      updatedAt: opportunity.updatedAt,
+
+      // Placeholder values until Upvote and Save modules are implemented
+      isUpvotedByCurrentStudent: false,
+      isSavedByCurrentStudent: false,
+    };
+  }
 }
