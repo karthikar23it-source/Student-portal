@@ -126,7 +126,6 @@ export class OpportunityController {
       const deadlineRange = String(req.query.deadlineRange || "");
       const sortBy = String(req.query.sortBy || "latest");
 
-      // Reuse Browse pagination defaults
       const page = Number(req.query.page) || 1;
       const limit = Number(req.query.limit) || 10;
 
@@ -145,6 +144,50 @@ export class OpportunityController {
       console.error("====== SEARCH FILTER OPPORTUNITIES ERROR ======");
       console.error(error);
       console.error("===============================================");
+
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+        stack:
+          process.env.NODE_ENV === "development"
+            ? error.stack
+            : undefined,
+      });
+    }
+  }
+
+  /**
+   * Upvote opportunity
+   * POST /api/opportunities/:opportunityId/upvote
+   */
+  async upvoteOpportunity(req: Request, res: Response) {
+    try {
+      const { opportunityId } = req.params;
+      const { studentId } = req.body;
+
+      const result =
+        await opportunityService.upvoteOpportunity(
+          opportunityId,
+          String(studentId)
+        );
+
+      return res.status(200).json(result);
+    } catch (error: any) {
+      console.error("====== UPVOTE OPPORTUNITY ERROR ======");
+      console.error(error);
+      console.error("======================================");
+
+      if (error.message === "ALREADY_UPVOTED") {
+        return res.status(409).json({
+          error: "ALREADY_UPVOTED",
+        });
+      }
+
+      if (error.message === "OPPORTUNITY_NOT_FOUND") {
+        return res.status(404).json({
+          error: "OPPORTUNITY_NOT_FOUND",
+        });
+      }
 
       return res.status(500).json({
         success: false,

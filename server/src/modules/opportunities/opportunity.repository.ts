@@ -1,5 +1,6 @@
 import { Opportunity } from "./models/opportunity.model.js";
 import type { IOpportunity } from "./models/opportunity.model.js";
+import { OpportunityUpvote } from "./models/opportunity-upvote.model.js";
 
 export class OpportunityRepository {
   /**
@@ -177,6 +178,58 @@ export class OpportunityRepository {
     return {
       opportunities,
       total,
+    };
+  }
+
+  /**
+   * Upvote an opportunity
+   */
+  async upvoteOpportunity(
+    opportunityId: string,
+    studentId: string
+  ) {
+    // Check whether opportunity exists
+    const opportunity = await Opportunity.findOne({
+      _id: opportunityId,
+      isArchived: false,
+    });
+
+    if (!opportunity) {
+      throw new Error("OPPORTUNITY_NOT_FOUND");
+    }
+
+    try {
+      // Insert upvote document
+      await OpportunityUpvote.create({
+        studentId,
+        opportunityId,
+      });
+    } catch (error: any) {
+      // Duplicate upvote
+      if (error.code === 11000) {
+        throw new Error("ALREADY_UPVOTED");
+      }
+
+      throw error;
+    }
+
+    // Increment upvote count
+    const updatedOpportunity =
+      await Opportunity.findByIdAndUpdate(
+        opportunityId,
+        {
+          $inc: {
+            upvoteCount: 1,
+          },
+        },
+        {
+          new: true,
+        }
+      );
+
+    return {
+      upvoted: true,
+      newCount: updatedOpportunity?.upvoteCount ?? 0,
     };
   }
 }

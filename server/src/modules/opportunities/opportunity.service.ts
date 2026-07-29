@@ -153,4 +153,17 @@ export class OpportunityService {
       })),
     };
   }
+
+  /**
+   * Upvote an opportunity
+   */
+  async upvoteOpportunity(
+    opportunityId: string,
+    studentId: string
+  ) {
+    return this.opportunityRepository.upvoteOpportunity(
+      opportunityId,
+      studentId
+    );
+  }
 }

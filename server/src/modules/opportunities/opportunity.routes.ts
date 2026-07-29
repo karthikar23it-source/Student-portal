@@ -27,6 +27,17 @@ router.get(
 );
 
 /**
+ * Upvote opportunity
+ * POST /api/opportunities/:opportunityId/upvote
+ */
+router.post(
+  "/:opportunityId/upvote",
+  opportunityController.upvoteOpportunity.bind(
+    opportunityController
+  )
+);
+
+/**
  * View opportunity detail
  * GET /api/opportunities/:opportunityId
  */
