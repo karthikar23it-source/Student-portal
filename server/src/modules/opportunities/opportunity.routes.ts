@@ -38,6 +38,17 @@ router.post(
 );
 
 /**
+ * Save opportunity
+ * POST /api/opportunities/:opportunityId/save
+ */
+router.post(
+  "/:opportunityId/save",
+  opportunityController.saveOpportunity.bind(
+    opportunityController
+  )
+);
+
+/**
  * Report opportunity
  * POST /api/opportunities/:opportunityId/report
  */

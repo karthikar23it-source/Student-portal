@@ -175,4 +175,17 @@ export class OpportunityService {
       reason
     );
   }
+
+  /**
+   * Save an opportunity
+   */
+  async saveOpportunity(
+    opportunityId: string,
+    studentId: string
+  ) {
+    return this.opportunityRepository.saveOpportunity(
+      opportunityId,
+      studentId
+    );
+  }
 }

@@ -2,6 +2,7 @@ import { Opportunity } from "./models/opportunity.model.js";
 import type { IOpportunity } from "./models/opportunity.model.js";
 import { OpportunityUpvote } from "./models/opportunity-upvote.model.js";
 import { OpportunityReport } from "./models/opportunity-report.model.js";
+import { OpportunitySave } from "./models/opportunity-save.model.js";
 
 export class OpportunityRepository {
   /**
@@ -200,7 +201,6 @@ export class OpportunityRepository {
     }
 
     try {
-      // Insert upvote document
       await OpportunityUpvote.create({
         studentId,
         opportunityId,
@@ -213,7 +213,6 @@ export class OpportunityRepository {
       throw error;
     }
 
-    // Increment upvote count
     const updatedOpportunity =
       await Opportunity.findByIdAndUpdate(
         opportunityId,
@@ -251,7 +250,6 @@ export class OpportunityRepository {
       throw new Error("OPPORTUNITY_NOT_FOUND");
     }
 
-    // Create report
     const report = await OpportunityReport.create({
       studentId,
       opportunityId,
@@ -262,6 +260,41 @@ export class OpportunityRepository {
     return {
       reportId: report._id,
       status: report.status,
+    };
+  }
+
+  /**
+   * Save an opportunity
+   */
+  async saveOpportunity(
+    opportunityId: string,
+    studentId: string
+  ) {
+    // Check whether opportunity exists
+    const opportunity = await Opportunity.findOne({
+      _id: opportunityId,
+      isArchived: false,
+    });
+
+    if (!opportunity) {
+      throw new Error("OPPORTUNITY_NOT_FOUND");
+    }
+
+    try {
+      await OpportunitySave.create({
+        studentId,
+        opportunityId,
+      });
+    } catch (error: any) {
+      if (error.code === 11000) {
+        throw new Error("ALREADY_SAVED");
+      }
+
+      throw error;
+    }
+
+    return {
+      saved: true,
     };
   }
 }

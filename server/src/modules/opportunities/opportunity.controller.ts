@@ -237,4 +237,48 @@ export class OpportunityController {
       });
     }
   }
+
+  /**
+   * Save opportunity
+   * POST /api/opportunities/:opportunityId/save
+   */
+  async saveOpportunity(req: Request, res: Response) {
+    try {
+      const { opportunityId } = req.params;
+      const { studentId } = req.body;
+
+      const result =
+        await opportunityService.saveOpportunity(
+          opportunityId,
+          String(studentId)
+        );
+
+      return res.status(200).json(result);
+    } catch (error: any) {
+      console.error("====== SAVE OPPORTUNITY ERROR ======");
+      console.error(error);
+      console.error("====================================");
+
+      if (error.message === "ALREADY_SAVED") {
+        return res.status(409).json({
+          error: "ALREADY_SAVED",
+        });
+      }
+
+      if (error.message === "OPPORTUNITY_NOT_FOUND") {
+        return res.status(404).json({
+          error: "OPPORTUNITY_NOT_FOUND",
+        });
+      }
+
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+        stack:
+          process.env.NODE_ENV === "development"
+            ? error.stack
+            : undefined,
+      });
+    }
+  }
 }
