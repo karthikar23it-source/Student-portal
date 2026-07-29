@@ -13,6 +13,8 @@ export interface IOpportunity extends Document {
 
   sourceUrl: string;
 
+  upvoteCount: number;
+
   isArchived: boolean;
 
   createdAt: Date;
@@ -60,6 +62,11 @@ const opportunitySchema = new Schema<IOpportunity>(
       type: String,
       required: true,
       trim: true,
+    },
+
+    upvoteCount: {
+      type: Number,
+      default: 0,
     },
 
     isArchived: {

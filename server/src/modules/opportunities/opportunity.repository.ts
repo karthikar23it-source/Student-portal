@@ -28,4 +28,30 @@ export class OpportunityRepository {
   ): Promise<IOpportunity | null> {
     return Opportunity.findById(opportunityId);
   }
+
+  /**
+   * Browse opportunities with pagination
+   */
+  async browseOpportunities(page: number, limit: number) {
+    const skip = (page - 1) * limit;
+
+    const [opportunities, total] = await Promise.all([
+      Opportunity.find({ isArchived: false })
+        .select(
+          "_id title organization category deadline upvoteCount"
+        )
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit),
+
+      Opportunity.countDocuments({
+        isArchived: false,
+      }),
+    ]);
+
+    return {
+      opportunities,
+      total,
+    };
+  }
 }

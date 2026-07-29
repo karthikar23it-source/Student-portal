@@ -60,4 +60,27 @@ export class OpportunityService {
       opportunityId: createdOpportunity._id,
     };
   }
+
+  /**
+   * Browse opportunities with pagination
+   */
+  async browseOpportunities(page: number, limit: number) {
+    const { opportunities, total } =
+      await this.opportunityRepository.browseOpportunities(page, limit);
+
+    return {
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
+      opportunities: opportunities.map((opportunity) => ({
+        opportunityId: opportunity._id,
+        title: opportunity.title,
+        organization: opportunity.organization,
+        category: opportunity.category,
+        deadline: opportunity.deadline,
+        upvoteCount: opportunity.upvoteCount,
+      })),
+    };
+  }
 }

@@ -1,7 +1,6 @@
 import type { Request, Response } from "express";
 
 import { OpportunityService } from "./opportunity.service.js";
-
 import { createOpportunitySchema } from "./opportunity.validation.js";
 
 const opportunityService = new OpportunityService();
@@ -36,6 +35,38 @@ export class OpportunityController {
           matchedOpportunityId,
         });
       }
+
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+        stack:
+          process.env.NODE_ENV === "development"
+            ? error.stack
+            : undefined,
+      });
+    }
+  }
+
+  /**
+   * Browse opportunities
+   * GET /api/opportunities?page=1&limit=10
+   */
+  async browseOpportunities(req: Request, res: Response) {
+    try {
+      const page = Number(req.query.page) || 1;
+      const limit = Number(req.query.limit) || 10;
+
+      const result =
+        await opportunityService.browseOpportunities(
+          page,
+          limit
+        );
+
+      return res.status(200).json(result);
+    } catch (error: any) {
+      console.error("====== BROWSE OPPORTUNITIES ERROR ======");
+      console.error(error);
+      console.error("========================================");
 
       return res.status(500).json({
         success: false,
