@@ -114,4 +114,46 @@ export class OpportunityController {
       });
     }
   }
+
+  /**
+   * Search & Filter opportunities
+   * GET /api/opportunities/search
+   */
+  async searchFilterOpportunities(req: Request, res: Response) {
+    try {
+      const keyword = String(req.query.keyword || "");
+      const category = String(req.query.category || "");
+      const deadlineRange = String(req.query.deadlineRange || "");
+      const sortBy = String(req.query.sortBy || "latest");
+
+      // Reuse Browse pagination defaults
+      const page = Number(req.query.page) || 1;
+      const limit = Number(req.query.limit) || 10;
+
+      const result =
+        await opportunityService.searchFilterOpportunities(
+          keyword,
+          category,
+          deadlineRange,
+          sortBy,
+          page,
+          limit
+        );
+
+      return res.status(200).json(result);
+    } catch (error: any) {
+      console.error("====== SEARCH FILTER OPPORTUNITIES ERROR ======");
+      console.error(error);
+      console.error("===============================================");
+
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+        stack:
+          process.env.NODE_ENV === "development"
+            ? error.stack
+            : undefined,
+      });
+    }
+  }
 }

@@ -7,6 +7,17 @@ const router = Router();
 const opportunityController = new OpportunityController();
 
 /**
+ * Search & Filter opportunities
+ * GET /api/opportunities/search
+ */
+router.get(
+  "/search",
+  opportunityController.searchFilterOpportunities.bind(
+    opportunityController
+  )
+);
+
+/**
  * Browse opportunities
  * GET /api/opportunities?page=1&limit=10
  */

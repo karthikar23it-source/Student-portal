@@ -116,4 +116,41 @@ export class OpportunityService {
       isSavedByCurrentStudent: false,
     };
   }
+
+  /**
+   * Search & Filter opportunities
+   */
+  async searchFilterOpportunities(
+    keyword: string,
+    category: string,
+    deadlineRange: string,
+    sortBy: string,
+    page: number,
+    limit: number
+  ) {
+    const { opportunities, total } =
+      await this.opportunityRepository.searchFilterOpportunities(
+        keyword,
+        category,
+        deadlineRange,
+        sortBy,
+        page,
+        limit
+      );
+
+    return {
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
+      opportunities: opportunities.map((opportunity) => ({
+        opportunityId: opportunity._id,
+        title: opportunity.title,
+        organization: opportunity.organization,
+        category: opportunity.category,
+        deadline: opportunity.deadline,
+        upvoteCount: opportunity.upvoteCount,
+      })),
+    };
+  }
 }

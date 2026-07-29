@@ -66,4 +66,117 @@ export class OpportunityRepository {
       isArchived: false,
     });
   }
+
+  /**
+   * Search & Filter opportunities
+   */
+  async searchFilterOpportunities(
+    keyword: string,
+    category: string,
+    deadlineRange: string,
+    sortBy: string,
+    page: number,
+    limit: number
+  ) {
+    const query: any = {
+      isArchived: false,
+    };
+
+    // Keyword search
+    if (keyword) {
+      query.$or = [
+        {
+          title: {
+            $regex: keyword,
+            $options: "i",
+          },
+        },
+        {
+          organization: {
+            $regex: keyword,
+            $options: "i",
+          },
+        },
+      ];
+    }
+
+    // Category filter
+    if (category) {
+      query.category = category;
+    }
+
+    // Deadline filter
+    if (deadlineRange) {
+      const today = new Date();
+      const endDate = new Date();
+
+      switch (deadlineRange) {
+        case "today":
+          endDate.setDate(today.getDate() + 1);
+          break;
+
+        case "7days":
+          endDate.setDate(today.getDate() + 7);
+          break;
+
+        case "30days":
+          endDate.setDate(today.getDate() + 30);
+          break;
+
+        default:
+          break;
+      }
+
+      if (["today", "7days", "30days"].includes(deadlineRange)) {
+        query.deadline = {
+          $gte: today,
+          $lte: endDate,
+        };
+      }
+    }
+
+    // Sorting
+    let sort: any = {
+      createdAt: -1,
+    };
+
+    switch (sortBy) {
+      case "deadline":
+        sort = {
+          deadline: 1,
+        };
+        break;
+
+      case "title":
+        sort = {
+          title: 1,
+        };
+        break;
+
+      case "latest":
+      default:
+        sort = {
+          createdAt: -1,
+        };
+    }
+
+    const skip = (page - 1) * limit;
+
+    const [opportunities, total] = await Promise.all([
+      Opportunity.find(query)
+        .select(
+          "_id title organization category deadline upvoteCount"
+        )
+        .sort(sort)
+        .skip(skip)
+        .limit(limit),
+
+      Opportunity.countDocuments(query),
+    ]);
+
+    return {
+      opportunities,
+      total,
+    };
+  }
 }
