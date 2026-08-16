@@ -1,0 +1,105 @@
+.deadline-reminder-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.page-header button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.reminder-settings h4,
+.reminder-list h4 {
+  color: #6b7280;
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.setting-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.setting-card strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.setting-card p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.setting-card input {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.reminder-list {
+  margin-top: 30px;
+}
+
+.reminder-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.calendar-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: #eef6ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+}
+
+.reminder-content h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.reminder-content p {
+  margin-top: 4px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.notification-status {
+  text-align: center;
+  margin-top: 40px;
+  color: #6b7280;
+}
