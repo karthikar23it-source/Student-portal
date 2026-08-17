@@ -3,3 +3,9 @@ dist/
 .env
 coverage/
 *.log
+
+# TypeScript build output generated inside src/
+src/**/*.js
+src/**/*.js.map
+src/**/*.d.ts
+src/**/*.d.ts.map
