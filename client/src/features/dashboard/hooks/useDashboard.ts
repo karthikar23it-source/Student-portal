@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { getDashboardFeed } from '../services/dashboard.service';
+import { loadDashboardFeed } from '../services/dashboard.service';
 import type { DashboardFeedItem } from '../types/dashboard.types';
 
 export const useDashboard = () => {
@@ -10,10 +10,10 @@ export const useDashboard = () => {
   useEffect(() => {
     const loadDashboard = async () => {
       try {
-        const response = await getDashboardFeed();
+        const response = await loadDashboardFeed('1');
         setFeed(response.feed);
       } catch (error) {
-        console.error(error);
+        console.error('Failed to load dashboard feed:', error);
       } finally {
         setLoading(false);
       }

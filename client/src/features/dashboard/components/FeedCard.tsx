@@ -1,4 +1,5 @@
 import { Bell, BriefcaseBusiness, CalendarDays, Circle, Megaphone } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 import type { DashboardFeedItem } from '../types/dashboard.types';
 
@@ -58,6 +59,19 @@ const FeedCard = ({ item }: FeedCardProps) => {
     }
   };
 
+  const getActionPath = (): string => {
+    switch (item.itemType) {
+      case 'official_notice':
+        return '/official-notices';
+
+      case 'opportunity':
+        return '/opportunities/' + item.opportunityId;
+
+      default:
+        return '/dashboard';
+    }
+  };
+
   return (
     <article
       className="
@@ -71,7 +85,6 @@ const FeedCard = ({ item }: FeedCardProps) => {
       "
     >
       <div className="flex items-start gap-4">
-        {/* Icon */}
         <div
           className="
             flex
@@ -88,7 +101,6 @@ const FeedCard = ({ item }: FeedCardProps) => {
           {getIcon()}
         </div>
 
-        {/* Content */}
         <div className="flex flex-1 flex-col overflow-hidden">
           <span className="text-[11px] font-semibold tracking-[1px] text-[#2563EB] uppercase">
             {getCategory()}
@@ -104,13 +116,13 @@ const FeedCard = ({ item }: FeedCardProps) => {
 
           {item.deadline && <p className="mt-1 text-[14px] text-[#6B7280]">{item.deadline}</p>}
 
-          {/* Bottom Row */}
           <div className="mt-4 flex items-center justify-between">
             <span className="text-[12px] text-[#9CA3AF]">
               {new Date(item.postedAt).toLocaleDateString()}
             </span>
 
-            <button
+            <Link
+              to={getActionPath()}
               className="
                 shrink-0
                 rounded-md
@@ -123,7 +135,7 @@ const FeedCard = ({ item }: FeedCardProps) => {
               "
             >
               {getAction()}
-            </button>
+            </Link>
           </div>
         </div>
       </div>

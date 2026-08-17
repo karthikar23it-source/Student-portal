@@ -1,4 +1,5 @@
 import { Bell, BriefcaseBusiness, FileText, Home, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const BottomNavigation = () => {
   return (
@@ -15,7 +16,7 @@ const BottomNavigation = () => {
     >
       <div className="flex items-center justify-around">
         {/* Home */}
-        <button className="flex flex-col items-center gap-1">
+        <Link to="/dashboard" className="flex flex-col items-center gap-1">
           <div
             className="
               flex
@@ -31,24 +32,24 @@ const BottomNavigation = () => {
           </div>
 
           <span className="text-[11px] font-semibold text-[#2563EB]">Home</span>
-        </button>
+        </Link>
 
         {/* Notices */}
-        <button className="flex flex-col items-center gap-1">
+        <Link to="/official-notices" className="flex flex-col items-center gap-1">
           <FileText size={19} strokeWidth={2} className="text-[#6B7280]" />
 
           <span className="text-[11px] text-[#6B7280]">Notices</span>
-        </button>
+        </Link>
 
         {/* Opportunities */}
-        <button className="flex flex-col items-center gap-1">
+        <Link to="/post-opportunity" className="flex flex-col items-center gap-1">
           <BriefcaseBusiness size={19} strokeWidth={2} className="text-[#6B7280]" />
 
           <span className="text-[11px] text-[#6B7280]">Opps</span>
-        </button>
+        </Link>
 
         {/* Alerts */}
-        <button className="relative flex flex-col items-center gap-1">
+        <button type="button" className="relative flex flex-col items-center gap-1">
           <Bell size={19} strokeWidth={2} className="text-[#6B7280]" />
 
           <span className="text-[11px] text-[#6B7280]">Alerts</span>
@@ -57,7 +58,7 @@ const BottomNavigation = () => {
         </button>
 
         {/* Profile */}
-        <button className="flex flex-col items-center gap-1">
+        <button type="button" className="flex flex-col items-center gap-1">
           <User size={19} strokeWidth={2} className="text-[#6B7280]" />
 
           <span className="text-[11px] text-[#6B7280]">Profile</span>

@@ -1,5 +1,5 @@
 export interface VerifyOtpRequest {
-  studentId: number;
+  studentId: string;
   otpCode: string;
 }
 
@@ -9,7 +9,7 @@ export interface VerifyOtpResponse {
 }
 
 export interface ResendOtpRequest {
-  studentId: number;
+  studentId: string;
 }
 
 export interface ResendOtpResponse {

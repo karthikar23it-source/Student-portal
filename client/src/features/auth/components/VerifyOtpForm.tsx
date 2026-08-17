@@ -6,7 +6,7 @@ import OtpInput from './OtpInput';
 import { verifyOtp, resendOtp } from '../services/verifyOtp.service';
 
 interface VerifyOtpFormProps {
-  studentId: number;
+  studentId: string;
   collegeEmail: string;
 }
 

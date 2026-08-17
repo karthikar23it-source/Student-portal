@@ -1,8 +1,11 @@
 import DashboardHeader from '../components/DashboardHeader';
 import BottomNavigation from '../components/BottomNavigation';
 import FeedCard from '../components/FeedCard';
+import { useDashboard } from '../hooks/useDashboard';
 
 const Dashboard = () => {
+  const { feed, loading } = useDashboard();
+
   return (
     <div className="min-h-screen flex justify-center bg-[#EEF3FB]">
       <div className="flex h-screen w-full max-w-[470px] flex-col bg-[#F8FAFC]">
@@ -19,58 +22,22 @@ const Dashboard = () => {
             pb-24
           "
         >
-          {/* Cards */}
-          <div className="flex flex-col gap-6">
-            <FeedCard
-              item={{
-                itemType: 'official_notice',
-                noticeId: 1,
-                title: 'Semester Examination Timetable Published',
-                subtitle: 'Check the complete schedule for all departments.',
-                postedAt: '2026-07-22T09:15:00Z',
-              }}
-            />
-
-            <FeedCard
-              item={{
-                itemType: 'opportunity',
-                opportunityId: 2,
-                title: 'Microsoft Internship 2026',
-                subtitle: 'Registration closes on 18 July.',
-                postedAt: '2026-07-22T07:00:00Z',
-              }}
-            />
-
-            <FeedCard
-              item={{
-                itemType: 'workshop',
-                workshopId: 3,
-                title: 'Flutter Development Workshop',
-                subtitle: 'Tomorrow • Seminar Hall A',
-                postedAt: '2026-07-21T09:00:00Z',
-              }}
-            />
-
-            <FeedCard
-              item={{
-                itemType: 'reminder',
-                reminderId: 4,
-                title: 'Hackathon Registration',
-                subtitle: 'Closing in 2 days. Submit your team.',
-                postedAt: '2026-07-20T09:00:00Z',
-              }}
-            />
-
-            <FeedCard
-              item={{
-                itemType: 'placement',
-                placementId: 5,
-                title: 'TCS Campus Recruitment',
-                subtitle: 'Registration open for Final Year students.',
-                postedAt: '2026-07-19T09:00:00Z',
-              }}
-            />
-          </div>
+          {loading ? (
+            <div className="py-10 text-center text-[14px] text-[#6B7280]">Loading...</div>
+          ) : (
+            <div className="flex flex-col gap-6">
+              {feed.map((item, index) => (
+                <FeedCard
+                  key={
+                    item.itemType +
+                    '-' +
+                    (item.noticeId ?? item.opportunityId ?? item.reminderId ?? index)
+                  }
+                  item={item}
+                />
+              ))}
+            </div>
+          )}
         </main>
 
         {/* Bottom Navigation */}
